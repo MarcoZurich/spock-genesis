@@ -25,6 +25,14 @@ class StringGeneratorSpec extends Specification {
             100    | ('A'..'z').collect()
     }
 
+    def 'string generation constructor with no max length should use DEFAULT_LENGTH_LIMIT'() {
+        setup:
+        def generator = new StringGenerator('a').iterator()
+
+        expect:
+        generator.next().size() <= StringGenerator.DEFAULT_LENGTH_LIMIT
+    }
+
     def 'default random string generation'() {
         setup:
             def generator = new StringGenerator().iterator()
